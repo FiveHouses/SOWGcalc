@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/portrait_view"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="vertical"
+android:background="#212021"
+>
+    
+    <TableRow android:layout_weight="16"
+    android:layout_height="0dip"
+    android:layout_width="fill_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/portrait_output"
+    android:id="@+id/outputRow">
+       	<com.sowg.calc.SOWGEditText
+	    android:id="@+id/output"
+	    android:layout_height="fill_parent"
+	    android:layout_width="fill_parent"
+	    android:textColor="@android:color/white"
+	    android:background="@android:color/transparent"
+	    android:gravity="right"
+	    android:scrollHorizontally="true"
+	    android:singleLine="true"
+	    android:lines="1"
+	    android:layout_marginLeft="9dip"
+	    android:layout_marginRight="12dip"
+	    android:layout_marginTop="12dip" android:textScaleX="0.9"/>
+    </TableRow>
+
+    <TableRow android:layout_weight="14"
+    android:layout_height="0dip"
+    android:layout_width="fill_parent">
+    	<com.sowg.calc.SOWGButton
+	    android:id="@+id/calcMC"
+	    android:src="@drawable/btn_mc"
+	    android:onClick="MCListener"
+	    style="@style/MButton"
+	    />
+	    <com.sowg.calc.SOWGButton
+	    android:id="@+id/calcMR"
+	    android:src="@drawable/btn_mr"
+	    android:onClick="MRListener"
+	    style="@style/MButton"
+	    />
+	    <com.sowg.calc.SOWGButton
+	    android:id="@+id/calcMminus"
+	    android:src="@drawable/btn_mminus"
+	    android:onClick="MMinusListener"
+	    style="@style/MButton"
+	    />
+	   	<com.sowg.calc.SOWGButton
+	    android:id="@+id/calcMplus"
+	    android:src="@drawable/btn_mplus"
+	    android:onClick="MPlusListener"
+	    style="@style/MButton"
+	    />
+	</TableRow>
+	
+	<TableRow android:layout_weight="14"
+	android:layout_height="0dip"
+	android:layout_width="fill_parent">
+	    <com.sowg.calc.SOWGButton
+	    android:id="@+id/calcDivide"
+	    android:src="@drawable/btn_div"
+	    android:tag="\u00F7"
+	    style="@style/CalcButton"
+	    />
+	   	<com.sowg.calc.SOWGButton
+	    android:id="@+id/calcMult"
+	    android:src="@drawable/btn_mult"
+	    android:tag="\u00D7"
+	    style="@style/CalcButton"
+	    />
+		<com.sowg.calc.SOWGButton
+	    android:id="@+id/calcMinus"
+	    android:src="@drawable/btn_minus"
+	    android:tag="-"
+	    style="@style/CalcButton"
+	    />
+	    <com.sowg.calc.SOWGButton
+	    android:id="@+id/calcPlus"
+	    android:src="@drawable/btn_plus"
+	    android:tag="+"
+	    style="@style/CalcButton"
+	    />
+	</TableRow>
+	
+	<TableRow android:layout_weight="14"
+	android:layout_height="0dip"
+	android:layout_width="fill_parent">
+	    <com.sowg.calc.SOWGButton
+	    android:id="@+id/calc7"
+	    android:src="@drawable/btn_7"
+	    android:tag="7"
+	    style="@style/CalcButton"
+	    />
+	    <com.sowg.calc.SOWGButton
+	    android:id="@+id/calc8"
+	    android:src="@drawable/btn_8"
+	    android:tag="8"
+	    style="@style/CalcButton"
+	    />
+	    <com.sowg.calc.SOWGButton
+	    android:id="@+id/calc9"
+	    android:src="@drawable/btn_9"
+	    android:tag="9"
+	    style="@style/CalcButton"
+	    />
+	    <com.sowg.calc.SOWGButton
+	    android:id="@+id/calcC"
+	    android:src="@drawable/btn_c"
+	    android:onClick="clearListener"
+	    android:layout_height="fill_parent"
+	    style="@style/CalcButton"
+	    />
+	</TableRow>
+
+	<TableRow android:layout_weight="14"
+	android:layout_height="0dip"
+	android:layout_width="fill_parent">
+		<com.sowg.calc.SOWGButton
+	    android:id="@+id/calc4"
+	    android:src="@drawable/btn_4"
+	    android:tag="4"
+	    style="@style/CalcButton"
+	    />
+	    <com.sowg.calc.SOWGButton
+	    android:id="@+id/calc5"
+	    android:src="@drawable/btn_5"
+	    android:tag="5"
+	    style="@style/CalcButton"
+	    />
+	    <com.sowg.calc.SOWGButton
+	    android:id="@+id/calc6"
+	    android:src="@drawable/btn_6"
+	    android:tag="6"
+	    style="@style/CalcButton"
+	    />
+	    <com.sowg.calc.SOWGButton
+	    android:id="@+id/calcBackspace"
+	    android:src="@drawable/btn_backspace"
+	    android:onClick="backspaceListener"
+	    style="@style/CalcButton"
+	    />
+	</TableRow>
+	
+	<TableRow android:layout_weight="28"
+	android:layout_height="0dip"
+	android:layout_width="fill_parent">
+		<LinearLayout
+		android:layout_height="fill_parent"
+		android:layout_width="0dip"
+		android:orientation="vertical" android:layout_weight="3">
+			<TableRow android:layout_weight="1"
+			android:layout_height="fill_parent"
+			android:layout_width="fill_parent">
+				<com.sowg.calc.SOWGButton
+			    android:id="@+id/calc1"
+			    android:src="@drawable/btn_1"
+			    android:tag="1"
+			    android:layout_weight="1"
+			    style="@style/CalcButton"
+			    />
+			    <com.sowg.calc.SOWGButton
+			    android:id="@+id/calc2"
+			    android:src="@drawable/btn_2"
+			    android:tag="2"
+			    android:layout_weight="1"
+			    style="@style/CalcButton"
+			    />
+			    <com.sowg.calc.SOWGButton
+			    android:id="@+id/calc3"
+			    android:src="@drawable/btn_3"
+			    android:tag="3"
+			    android:layout_weight="1"
+			    style="@style/CalcButton"
+			    />
+			</TableRow>
+		
+			<TableRow android:layout_weight="1"
+			android:layout_height="fill_parent"
+			android:layout_width="fill_parent">
+			    <com.sowg.calc.SOWGButton
+			    android:id="@+id/calc0"
+			    android:src="@drawable/btn_0"
+			    android:tag="0"
+			    android:layout_weight="2"
+			    style="@style/ZeroButton"
+			    android:layout_marginRight="4dip" android:layout_marginLeft="2dip"/>
+			    <com.sowg.calc.SOWGButton
+			    android:id="@+id/calcDot"
+			    android:src="@drawable/btn_decimal"
+			    android:tag="."
+			    style="@style/CalcButton"
+			    />
+			</TableRow>
+		</LinearLayout>
+			
+		<com.sowg.calc.SOWGButton
+		android:id="@+id/calcEquals"
+	    android:src="@drawable/btn_equals"
+	    android:onClick="equalsListener"
+	    style="@style/EqualsButton" android:layout_marginRight="0dip" android:layout_marginLeft="0dip"/>
+	</TableRow>
+</LinearLayout>
