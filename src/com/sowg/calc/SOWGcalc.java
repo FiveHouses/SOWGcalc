@@ -19,13 +19,14 @@
 
 package com.sowg.calc;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import android.app.Activity;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -33,10 +34,13 @@ public class SOWGcalc extends Activity {
 	private final char[] repChars = {'+', Constants.DIV_CHAR, Constants.MULT_CHAR, '^'};
 	private final char[] nonClearChars = {'+', '-', Constants.DIV_CHAR, Constants.MULT_CHAR, '^', '!'};
 	private final char[] doubles = {'.'};
+	private final String[] masterClearValues = { Constants.NAN_STRING, Character.toString(Constants.INFINITY_CHAR) };
 	
 	private final SOWGNumberKeyListener keyL = new SOWGNumberKeyListener();
 	
+	private HashSet<String> masterClearSet;
 	private boolean clearItFirst = false;
+	private boolean masterClear = false;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -47,15 +51,18 @@ public class SOWGcalc extends Activity {
 
         //set key override
         output.setKeyListener(keyL);
-        
+
         //focus
         output.setSelected(true);
-        
+
         //set font
         Typeface font = Typeface.createFromAsset(getAssets(), "outputfont.ttf");
         output.setTypeface(font);
+
+        //input master clear hash set with values from string[]
+        masterClearSet = new HashSet<String>(Arrays.asList(masterClearValues));
     }
-    
+
     //listener for text buttons
     public void buttonClickListener(View v)
     {
@@ -64,26 +71,27 @@ public class SOWGcalc extends Activity {
     	String newChars = b.getTag().toString();
     	char lastNewChar = newChars.charAt(newChars.length() - 1);
     	char firstNewChar = newChars.charAt(0);
-    	
-    	//handle clearing it before, e.g. if equals was just clicked
-    	if (clearItFirst && !Helper.charInList(firstNewChar, nonClearChars))
+
+    	//handle clearing it before, e.g. if equals was just clicked - note auto-override with master clear
+    	if (masterClear || (clearItFirst && !Helper.charInList(firstNewChar, nonClearChars)))
     	{
     		clearListener(v);
     	}
-    	//make sure to reset this no matter what
+    	//make sure to reset these flags no matter what
+    	masterClear = false;
     	clearItFirst = false;
-    	
+
     	//get the output field
     	EditText output = (EditText) findViewById(R.id.output);
         //output.setTextSize((float)output.getMeasuredHeight() / 2.0f);
- 
+
     	//current text in field
     	String currText = output.getText().toString();
-    	
+
     	//indices for selection
     	int start = Math.min(output.getSelectionStart(), output.getSelectionEnd());
     	int end = Math.max(output.getSelectionStart(), output.getSelectionEnd());
-    	
+
     	//check the last char for add/replace
     	if (currText.length() > 0)
     	{
@@ -94,10 +102,10 @@ public class SOWGcalc extends Activity {
 	    		start--;
     		}
     	}
-    	
+
     	//temporarily allow all text
     	output.setKeyListener(null);
-    	
+
     	//insert
     	try
     	{
@@ -105,16 +113,22 @@ public class SOWGcalc extends Activity {
     	}
     	catch(Exception e)
     	{
-    		
+
     	}
-    	
+
     	//reinstate key restrictions
     	output.setKeyListener(keyL);
     }
-    
+
     //equals button listener
     public void equalsListener(View v)
-    {    	
+    {
+    	//quick master clear check
+    	if (masterClear)
+    	{
+    		clearListener(v);
+    	}
+    	
     	setOutput(getCalcResult());
     }
     
@@ -147,13 +161,35 @@ public class SOWGcalc extends Activity {
     //M+ button
     public void MPlusListener(View v)
     {
-    	Memory.plus(Double.parseDouble(getCalcResult()));
+    	//= first
+    	equalsListener(v);
+
+    	try
+    	{
+    		Memory.plus(Double.parseDouble(getCalcText()));
+		}
+		catch (Exception e)
+		{
+			//clear output on bad input
+			clearListener(v);
+		}
     }
-    
+
     //M- button
     public void MMinusListener(View v)
     {
-    	Memory.minus(Double.parseDouble(getCalcResult()));
+    	//= first
+    	equalsListener(v);
+    	
+    	try
+    	{
+    		Memory.minus(Double.parseDouble(getCalcText()));
+    	}
+    	catch (Exception e)
+    	{
+    		//clear output on bad input
+    		clearListener(v);
+    	}
     }
     
     //set the output window with a specific string
@@ -180,22 +216,29 @@ public class SOWGcalc extends Activity {
     	
     	//set the clear flag
     	clearItFirst = true;
+    	masterClear = masterClearSet.contains(output.getText().toString());
     }
     
     //pass in a string expression, get a result
     private String getCalcResult()
     {
-    	//get the calculator string
-    	EditText output = (EditText) findViewById(R.id.output);
-    	String calcText = output.getText().toString();
-    	
     	//feed it through a parentheses checker
-    	String correctedText = Helper.addParentheses(calcText);
+    	String correctedText = Helper.addParentheses(getCalcText());
     	
     	//return the evaluated result
     	return CalcGrammar.evalGrammar(correctedText);
     }
     
+    //retrieve contents of calculator output view
+    private String getCalcText()
+    {
+    	//get the calculator string
+    	EditText output = (EditText) findViewById(R.id.output);
+    	String calcText = output.getText().toString();
+
+    	return calcText;
+    }
+
     //do we add to the string or replace the last char instead?
     private boolean addOrReplace(char lastChar, char toAdd)
     {

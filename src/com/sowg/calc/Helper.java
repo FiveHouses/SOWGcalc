@@ -175,7 +175,7 @@ public class Helper
     	//quick not a number check
     	if (Double.isNaN(val))
     	{
-    		return "Not a Number";
+    		return Constants.NAN_STRING;
     	}
     	
 	    NumberFormat formatter;
