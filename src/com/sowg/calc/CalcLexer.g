@@ -37,8 +37,9 @@ POWER:	'^';
 E:	'e';
 PI:	'\u03C0' | 'pi';
 SQRT:	'\u221A' | 'sqrt';
+DECIMALPOINT: '.' | ',';
 
-DECIMAL : (DIGIT+ ('.' DIGIT*)? | '.' DIGIT+) ('E' MINUS? DIGIT+)?;
+DECIMAL : (DIGIT+ (DECIMALPOINT DIGIT*)? | DECIMALPOINT DIGIT+) ('E' MINUS? DIGIT+)?;
 
 WHITESPACE : ('\t' | ' ' | '\r' | '\n'| '\u000C')+ 	{ $channel = HIDDEN; };
 

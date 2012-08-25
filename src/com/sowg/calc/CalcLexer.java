@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 CalcLexer.g 2010-11-10 03:29:05
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 CalcLexer.g 2012-08-25 08:09:19
 /**
  *  SOWGware, Copyright 2010
  * 
@@ -29,7 +29,7 @@ public class CalcLexer extends Lexer {
     public static final int E=17;
     public static final int LN=13;
     public static final int LOG=14;
-    public static final int WHITESPACE=22;
+    public static final int WHITESPACE=23;
     public static final int POWER=16;
     public static final int MULT=6;
     public static final int MINUS=5;
@@ -37,14 +37,15 @@ public class CalcLexer extends Lexer {
     public static final int EOF=-1;
     public static final int LPAREN=8;
     public static final int RPAREN=9;
-    public static final int DECIMAL=21;
+    public static final int DECIMAL=22;
     public static final int SIN=10;
     public static final int COS=11;
     public static final int TAN=12;
     public static final int PLUS=4;
     public static final int PI=18;
-    public static final int DIGIT=20;
+    public static final int DIGIT=21;
     public static final int DIV=7;
+    public static final int DECIMALPOINT=20;
     public static final int FACT=15;
 
     // delegates
@@ -455,22 +456,50 @@ public class CalcLexer extends Lexer {
     }
     // $ANTLR end "SQRT"
 
+    // $ANTLR start "DECIMALPOINT"
+    public final void mDECIMALPOINT() throws RecognitionException {
+        try {
+            int _type = DECIMALPOINT;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // CalcLexer.g:40:13: ( '.' | ',' )
+            // CalcLexer.g:
+            {
+            if ( input.LA(1)==','||input.LA(1)=='.' ) {
+                input.consume();
+
+            }
+            else {
+                MismatchedSetException mse = new MismatchedSetException(null,input);
+                recover(mse);
+                throw mse;}
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "DECIMALPOINT"
+
     // $ANTLR start "DECIMAL"
     public final void mDECIMAL() throws RecognitionException {
         try {
             int _type = DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // CalcLexer.g:41:9: ( ( ( DIGIT )+ ( '.' ( DIGIT )* )? | '.' ( DIGIT )+ ) ( 'E' ( MINUS )? ( DIGIT )+ )? )
-            // CalcLexer.g:41:11: ( ( DIGIT )+ ( '.' ( DIGIT )* )? | '.' ( DIGIT )+ ) ( 'E' ( MINUS )? ( DIGIT )+ )?
+            // CalcLexer.g:42:9: ( ( ( DIGIT )+ ( DECIMALPOINT ( DIGIT )* )? | DECIMALPOINT ( DIGIT )+ ) ( 'E' ( MINUS )? ( DIGIT )+ )? )
+            // CalcLexer.g:42:11: ( ( DIGIT )+ ( DECIMALPOINT ( DIGIT )* )? | DECIMALPOINT ( DIGIT )+ ) ( 'E' ( MINUS )? ( DIGIT )+ )?
             {
-            // CalcLexer.g:41:11: ( ( DIGIT )+ ( '.' ( DIGIT )* )? | '.' ( DIGIT )+ )
+            // CalcLexer.g:42:11: ( ( DIGIT )+ ( DECIMALPOINT ( DIGIT )* )? | DECIMALPOINT ( DIGIT )+ )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
             if ( ((LA7_0>='0' && LA7_0<='9')) ) {
                 alt7=1;
             }
-            else if ( (LA7_0=='.') ) {
+            else if ( (LA7_0==','||LA7_0=='.') ) {
                 alt7=2;
             }
             else {
@@ -481,9 +510,9 @@ public class CalcLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // CalcLexer.g:41:12: ( DIGIT )+ ( '.' ( DIGIT )* )?
+                    // CalcLexer.g:42:12: ( DIGIT )+ ( DECIMALPOINT ( DIGIT )* )?
                     {
-                    // CalcLexer.g:41:12: ( DIGIT )+
+                    // CalcLexer.g:42:12: ( DIGIT )+
                     int cnt3=0;
                     loop3:
                     do {
@@ -497,7 +526,7 @@ public class CalcLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // CalcLexer.g:41:12: DIGIT
+                    	    // CalcLexer.g:42:12: DIGIT
                     	    {
                     	    mDIGIT(); 
 
@@ -513,19 +542,19 @@ public class CalcLexer extends Lexer {
                         cnt3++;
                     } while (true);
 
-                    // CalcLexer.g:41:19: ( '.' ( DIGIT )* )?
+                    // CalcLexer.g:42:19: ( DECIMALPOINT ( DIGIT )* )?
                     int alt5=2;
                     int LA5_0 = input.LA(1);
 
-                    if ( (LA5_0=='.') ) {
+                    if ( (LA5_0==','||LA5_0=='.') ) {
                         alt5=1;
                     }
                     switch (alt5) {
                         case 1 :
-                            // CalcLexer.g:41:20: '.' ( DIGIT )*
+                            // CalcLexer.g:42:20: DECIMALPOINT ( DIGIT )*
                             {
-                            match('.'); 
-                            // CalcLexer.g:41:24: ( DIGIT )*
+                            mDECIMALPOINT(); 
+                            // CalcLexer.g:42:33: ( DIGIT )*
                             loop4:
                             do {
                                 int alt4=2;
@@ -538,7 +567,7 @@ public class CalcLexer extends Lexer {
 
                                 switch (alt4) {
                             	case 1 :
-                            	    // CalcLexer.g:41:24: DIGIT
+                            	    // CalcLexer.g:42:33: DIGIT
                             	    {
                             	    mDIGIT(); 
 
@@ -560,10 +589,10 @@ public class CalcLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // CalcLexer.g:41:35: '.' ( DIGIT )+
+                    // CalcLexer.g:42:44: DECIMALPOINT ( DIGIT )+
                     {
-                    match('.'); 
-                    // CalcLexer.g:41:39: ( DIGIT )+
+                    mDECIMALPOINT(); 
+                    // CalcLexer.g:42:57: ( DIGIT )+
                     int cnt6=0;
                     loop6:
                     do {
@@ -577,7 +606,7 @@ public class CalcLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // CalcLexer.g:41:39: DIGIT
+                    	    // CalcLexer.g:42:57: DIGIT
                     	    {
                     	    mDIGIT(); 
 
@@ -599,7 +628,7 @@ public class CalcLexer extends Lexer {
 
             }
 
-            // CalcLexer.g:41:47: ( 'E' ( MINUS )? ( DIGIT )+ )?
+            // CalcLexer.g:42:65: ( 'E' ( MINUS )? ( DIGIT )+ )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -608,10 +637,10 @@ public class CalcLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // CalcLexer.g:41:48: 'E' ( MINUS )? ( DIGIT )+
+                    // CalcLexer.g:42:66: 'E' ( MINUS )? ( DIGIT )+
                     {
                     match('E'); 
-                    // CalcLexer.g:41:52: ( MINUS )?
+                    // CalcLexer.g:42:70: ( MINUS )?
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -620,7 +649,7 @@ public class CalcLexer extends Lexer {
                     }
                     switch (alt8) {
                         case 1 :
-                            // CalcLexer.g:41:52: MINUS
+                            // CalcLexer.g:42:70: MINUS
                             {
                             mMINUS(); 
 
@@ -629,7 +658,7 @@ public class CalcLexer extends Lexer {
 
                     }
 
-                    // CalcLexer.g:41:59: ( DIGIT )+
+                    // CalcLexer.g:42:77: ( DIGIT )+
                     int cnt9=0;
                     loop9:
                     do {
@@ -643,7 +672,7 @@ public class CalcLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // CalcLexer.g:41:59: DIGIT
+                    	    // CalcLexer.g:42:77: DIGIT
                     	    {
                     	    mDIGIT(); 
 
@@ -681,10 +710,10 @@ public class CalcLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // CalcLexer.g:43:12: ( ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+ )
-            // CalcLexer.g:43:14: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
+            // CalcLexer.g:44:12: ( ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+ )
+            // CalcLexer.g:44:14: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
             {
-            // CalcLexer.g:43:14: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
+            // CalcLexer.g:44:14: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
             int cnt11=0;
             loop11:
             do {
@@ -737,8 +766,8 @@ public class CalcLexer extends Lexer {
     // $ANTLR start "DIGIT"
     public final void mDIGIT() throws RecognitionException {
         try {
-            // CalcLexer.g:45:16: ( '0' .. '9' )
-            // CalcLexer.g:45:18: '0' .. '9'
+            // CalcLexer.g:46:16: ( '0' .. '9' )
+            // CalcLexer.g:46:18: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -751,8 +780,8 @@ public class CalcLexer extends Lexer {
     // $ANTLR end "DIGIT"
 
     public void mTokens() throws RecognitionException {
-        // CalcLexer.g:1:8: ( PLUS | MINUS | MULT | DIV | LPAREN | RPAREN | SIN | COS | TAN | LN | LOG | FACT | POWER | E | PI | SQRT | DECIMAL | WHITESPACE )
-        int alt12=18;
+        // CalcLexer.g:1:8: ( PLUS | MINUS | MULT | DIV | LPAREN | RPAREN | SIN | COS | TAN | LN | LOG | FACT | POWER | E | PI | SQRT | DECIMALPOINT | DECIMAL | WHITESPACE )
+        int alt12=19;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
@@ -868,14 +897,21 @@ public class CalcLexer extends Lexer {
                 }
                 break;
             case 17 :
-                // CalcLexer.g:1:84: DECIMAL
+                // CalcLexer.g:1:84: DECIMALPOINT
+                {
+                mDECIMALPOINT(); 
+
+                }
+                break;
+            case 18 :
+                // CalcLexer.g:1:97: DECIMAL
                 {
                 mDECIMAL(); 
 
                 }
                 break;
-            case 18 :
-                // CalcLexer.g:1:92: WHITESPACE
+            case 19 :
+                // CalcLexer.g:1:105: WHITESPACE
                 {
                 mWHITESPACE(); 
 
@@ -889,21 +925,21 @@ public class CalcLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\25\uffff";
+        "\20\uffff\1\26\6\uffff";
     static final String DFA12_eofS =
-        "\25\uffff";
+        "\27\uffff";
     static final String DFA12_minS =
-        "\1\11\6\uffff\1\151\2\uffff\1\156\12\uffff";
+        "\1\11\6\uffff\1\151\2\uffff\1\156\5\uffff\1\60\6\uffff";
     static final String DFA12_maxS =
-        "\1\u221a\6\uffff\1\161\2\uffff\1\157\12\uffff";
+        "\1\u221a\6\uffff\1\161\2\uffff\1\157\5\uffff\1\71\6\uffff";
     static final String DFA12_acceptS =
         "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\uffff\1\10\1\11\1\uffff\1\14"+
-        "\1\15\1\16\1\17\1\20\1\21\1\22\1\7\1\12\1\13";
+        "\1\15\1\16\1\17\1\20\1\uffff\1\22\1\23\1\7\1\12\1\13\1\21";
     static final String DFA12_specialS =
-        "\25\uffff}>";
+        "\27\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\2\21\1\uffff\2\21\22\uffff\1\21\1\13\6\uffff\1\5\1\6\1\3\1"+
-            "\1\1\uffff\1\2\1\20\1\4\12\20\44\uffff\1\14\4\uffff\1\10\1\uffff"+
+            "\2\22\1\uffff\2\22\22\uffff\1\22\1\13\6\uffff\1\5\1\6\1\3\1"+
+            "\1\1\20\1\2\1\20\1\4\12\21\44\uffff\1\14\4\uffff\1\10\1\uffff"+
             "\1\15\6\uffff\1\12\3\uffff\1\16\2\uffff\1\7\1\11\142\uffff\1"+
             "\3\37\uffff\1\4\u02c8\uffff\1\16\u1e59\uffff\1\17",
             "",
@@ -912,14 +948,16 @@ public class CalcLexer extends Lexer {
             "",
             "",
             "",
-            "\1\22\7\uffff\1\17",
+            "\1\23\7\uffff\1\17",
             "",
             "",
-            "\1\23\1\24",
+            "\1\24\1\25",
             "",
             "",
             "",
             "",
+            "",
+            "\12\21",
             "",
             "",
             "",
@@ -958,7 +996,7 @@ public class CalcLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( PLUS | MINUS | MULT | DIV | LPAREN | RPAREN | SIN | COS | TAN | LN | LOG | FACT | POWER | E | PI | SQRT | DECIMAL | WHITESPACE );";
+            return "1:1: Tokens : ( PLUS | MINUS | MULT | DIV | LPAREN | RPAREN | SIN | COS | TAN | LN | LOG | FACT | POWER | E | PI | SQRT | DECIMALPOINT | DECIMAL | WHITESPACE );";
         }
     }
  

@@ -82,7 +82,6 @@ term returns[double value]
 | SIN LPAREN expr RPAREN{$value = Helper.round(Math.sin($expr.value), trigRound);}
 | COS LPAREN expr RPAREN{$value = Helper.round(Math.cos($expr.value), trigRound);}
 | TAN LPAREN expr RPAREN{$value = Helper.round(Math.tan($expr.value), trigRound);}
-| DECIMAL				{Double d = Double.parseDouble($DECIMAL.text);
-						$value = d.doubleValue();}
+| DECIMAL				{$value = Helper.DecimalToDouble($DECIMAL.text);}
 | PI					{$value = Math.PI;}
 | E						{$value = Math.E;};

@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 CalcParser.g 2010-11-10 03:29:06
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 CalcParser.g 2012-08-25 08:09:19
 /**
  *  SOWGware, Copyright 2010
  * 
@@ -27,12 +27,12 @@ import java.util.ArrayList;
 
 public class CalcParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "PLUS", "MINUS", "MULT", "DIV", "LPAREN", "RPAREN", "SIN", "COS", "TAN", "LN", "LOG", "FACT", "POWER", "E", "PI", "SQRT", "DIGIT", "DECIMAL", "WHITESPACE"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "PLUS", "MINUS", "MULT", "DIV", "LPAREN", "RPAREN", "SIN", "COS", "TAN", "LN", "LOG", "FACT", "POWER", "E", "PI", "SQRT", "DECIMALPOINT", "DIGIT", "DECIMAL", "WHITESPACE"
     };
     public static final int E=17;
     public static final int LN=13;
     public static final int LOG=14;
-    public static final int WHITESPACE=22;
+    public static final int WHITESPACE=23;
     public static final int POWER=16;
     public static final int MULT=6;
     public static final int MINUS=5;
@@ -40,14 +40,15 @@ public class CalcParser extends Parser {
     public static final int EOF=-1;
     public static final int LPAREN=8;
     public static final int RPAREN=9;
-    public static final int DECIMAL=21;
+    public static final int DECIMAL=22;
     public static final int SIN=10;
     public static final int COS=11;
     public static final int TAN=12;
     public static final int PLUS=4;
     public static final int PI=18;
-    public static final int DIGIT=20;
+    public static final int DIGIT=21;
     public static final int DIV=7;
+    public static final int DECIMALPOINT=20;
     public static final int FACT=15;
 
     // delegates
@@ -829,13 +830,12 @@ public class CalcParser extends Parser {
                     // CalcParser.g:85:3: DECIMAL
                     {
                     DECIMAL14=(Token)match(input,DECIMAL,FOLLOW_DECIMAL_in_term367); 
-                    Double d = Double.parseDouble((DECIMAL14!=null?DECIMAL14.getText():null));
-                    						value = d.doubleValue();
+                    value = Helper.DecimalToDouble((DECIMAL14!=null?DECIMAL14.getText():null));
 
                     }
                     break;
                 case 8 :
-                    // CalcParser.g:87:3: PI
+                    // CalcParser.g:86:3: PI
                     {
                     match(input,PI,FOLLOW_PI_in_term376); 
                     value = Math.PI;
@@ -843,7 +843,7 @@ public class CalcParser extends Parser {
                     }
                     break;
                 case 9 :
-                    // CalcParser.g:88:3: E
+                    // CalcParser.g:87:3: E
                     {
                     match(input,E,FOLLOW_E_in_term386); 
                     value = Math.E;
@@ -870,48 +870,48 @@ public class CalcParser extends Parser {
 
     public static final BitSet FOLLOW_expr_in_ultimate33 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_multExpr_in_expr52 = new BitSet(new long[]{0x0000000000000032L});
-    public static final BitSet FOLLOW_PLUS_in_expr59 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_PLUS_in_expr59 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_multExpr_in_expr65 = new BitSet(new long[]{0x0000000000000032L});
-    public static final BitSet FOLLOW_MINUS_in_expr72 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_MINUS_in_expr72 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_multExpr_in_expr78 = new BitSet(new long[]{0x0000000000000032L});
     public static final BitSet FOLLOW_powExpr_in_multExpr98 = new BitSet(new long[]{0x00000000000000C2L});
-    public static final BitSet FOLLOW_MULT_in_multExpr105 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_MULT_in_multExpr105 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_powExpr_in_multExpr111 = new BitSet(new long[]{0x00000000000000C2L});
-    public static final BitSet FOLLOW_DIV_in_multExpr118 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_DIV_in_multExpr118 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_powExpr_in_multExpr126 = new BitSet(new long[]{0x00000000000000C2L});
     public static final BitSet FOLLOW_minusExpr_in_powExpr146 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_POWER_in_powExpr153 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_POWER_in_powExpr153 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_minusExpr_in_powExpr159 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_MINUS_in_minusExpr179 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_MINUS_in_minusExpr179 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_multTerms_in_minusExpr183 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_multTerms_in_minusExpr190 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_unaryExpr_in_multTerms218 = new BitSet(new long[]{0x00000000002E7D22L});
-    public static final BitSet FOLLOW_SQRT_in_unaryExpr251 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_unaryExpr_in_multTerms218 = new BitSet(new long[]{0x00000000004E7D22L});
+    public static final BitSet FOLLOW_SQRT_in_unaryExpr251 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_factExpr_in_unaryExpr255 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_factExpr_in_unaryExpr261 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_term_in_factExpr278 = new BitSet(new long[]{0x0000000000008002L});
     public static final BitSet FOLLOW_FACT_in_factExpr285 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_LPAREN_in_term301 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_LPAREN_in_term301 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_expr_in_term303 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_RPAREN_in_term305 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_LN_in_term311 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_LPAREN_in_term313 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_LPAREN_in_term313 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_expr_in_term315 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_RPAREN_in_term317 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_LOG_in_term323 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_LPAREN_in_term325 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_LPAREN_in_term325 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_expr_in_term327 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_RPAREN_in_term329 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_SIN_in_term334 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_LPAREN_in_term336 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_LPAREN_in_term336 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_expr_in_term338 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_RPAREN_in_term340 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_COS_in_term345 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_LPAREN_in_term347 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_LPAREN_in_term347 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_expr_in_term349 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_RPAREN_in_term351 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_TAN_in_term356 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_LPAREN_in_term358 = new BitSet(new long[]{0x00000000002E7D20L});
+    public static final BitSet FOLLOW_LPAREN_in_term358 = new BitSet(new long[]{0x00000000004E7D20L});
     public static final BitSet FOLLOW_expr_in_term360 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_RPAREN_in_term362 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_DECIMAL_in_term367 = new BitSet(new long[]{0x0000000000000002L});

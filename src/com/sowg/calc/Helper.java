@@ -89,6 +89,14 @@ public class Helper
     	return textCorrected;
     }
     
+    //convert single string decimal value to double
+    public static double DecimalToDouble(String dec)
+    {
+    	//replace all commas with periods
+    	String commaReplaced = dec.replace(',', '.');
+    	return Double.parseDouble(commaReplaced);
+    }
+    
     //returns a string filled with one repeating character
     public static String repeatingChars(char toRepeat, int number)
     {
@@ -100,9 +108,17 @@ public class Helper
 	//rounds a double to a specific precision
     public static double round(double d, int decimalPlace)
     {
-        BigDecimal bd = new BigDecimal(Double.toString(d));
-        bd = bd.setScale(decimalPlace,BigDecimal.ROUND_HALF_UP);
-        return bd.doubleValue();
+    	try
+    	{
+	        BigDecimal bd = new BigDecimal(Double.toString(d));
+	        bd = bd.setScale(decimalPlace,BigDecimal.ROUND_HALF_UP);
+	        return bd.doubleValue();
+    	}
+    	catch (NumberFormatException e)
+    	{
+    		//on NaN or +/- infinity return the value
+    		return d;
+    	}
     }
     
     //gamma function but bounded

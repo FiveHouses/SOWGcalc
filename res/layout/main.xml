@@ -26,7 +26,7 @@ android:background="#212021"
 	    android:lines="1"
 	    android:layout_marginLeft="9dip"
 	    android:layout_marginRight="12dip"
-	    android:layout_marginTop="12dip" android:textScaleX="0.9"/>
+	    android:layout_marginTop="12dip" android:textScaleX="0.85"/>
     </TableRow>
 
     <TableRow android:layout_weight="14"
