@@ -11,7 +11,7 @@ Target Android OS:
 10
 
 External libraries utilized:
-ANTLR 3.2 (www.antlr.org) - for grammar parsing
-Colt 1.2.0 (http://acs.lbl.gov/software/colt) - for factorial function
+* ANTLR 3.2 (www.antlr.org) - for grammar parsing  
+* Colt 1.2.0 (http://acs.lbl.gov/software/colt) - for factorial function  
 
 Copyright 2010-2019 Five Houses
