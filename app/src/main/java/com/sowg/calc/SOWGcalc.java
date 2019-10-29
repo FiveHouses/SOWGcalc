@@ -108,10 +108,10 @@ public class SOWGcalc extends Activity {
 
     	//insert
     	try
-    	{
-    		output.getText().replace(start, end, newChars);
-    	}
-    	catch(Exception e)
+		{
+			output.getText().replace(start, end, newChars);
+		}
+		catch(Exception e)
     	{
 
     	}

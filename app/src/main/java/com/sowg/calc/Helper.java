@@ -198,7 +198,7 @@ public class Helper
 	    double absVal = Math.abs(val);
 	    if (absVal != 0.0 && (absVal > 10000000000000.0 || absVal < 0.000000000001))
 	    {
-	    	formatter = new DecimalFormat("#.#########E0");
+	    	formatter = new DecimalFormat("#.#######E0");
 	    }
 	    else
 	    {
